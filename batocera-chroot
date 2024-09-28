@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo /pcgrande/batotest.sh
+sudo proot /pcgrande/batoroot/chroot /userdata/root.sh
+exit $?
