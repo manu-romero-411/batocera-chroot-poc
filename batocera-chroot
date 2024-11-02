@@ -1,5 +1,38 @@
 #!/bin/bash
 
-sudo /pcgrande/batotest.sh
-sudo proot /pcgrande/batoroot/chroot /userdata/root.sh
+function error(){
+	RED='\033[1;31m'
+	NC='\033[0m'
+	printf "${RED}[ERROR] $@ ${NC}\n"
+}
+
+function info(){
+	BLUE='\033[1;36m'
+	NC='\033[0m'
+	printf "${BLUE}[INFO] $@ ${NC}\n"
+}
+
+
+function check_root() {
+	if [[ $(whoami) != root ]]; then
+		error "No eres root"
+		exit 1
+	fi
+}
+
+
+if pidof xfce4-session && [[ $1 != "-b" ]]; then
+	/home/manuel/.local/bin/plank-respawn -k
+	xfce4-session-logout -lf &
+	XFCESESSION=1
+	while [ $XFCESESSION != 0 ]; do
+		if ! pidof xfce4-session; then
+			XFCESESSION=0
+		fi
+		sleep 0.5
+	done
+
+fi
+
+sudo /batocera/scripts/emustation-load "$@"
 exit $?

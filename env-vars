@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export MOUNT_POINT=/batoroot
+export DISPLAY_MANAGER=lightdm
+export BATO_MOUNT=/batocera
+export BATO_INSTALL_DIR=/batocera/rootfs
+export BATO_USERDATA=/sdcard/batocera
+export BATO_SYSTEM=/batocera/systemdir
